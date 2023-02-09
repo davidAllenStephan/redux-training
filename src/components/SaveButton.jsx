@@ -1,10 +1,12 @@
 import { getDatabase, ref, push } from '@firebase/database'
 import { initializeApp } from 'firebase/app'
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { mix } from '../redux/app/movement/movementSlice'
 
 const SaveButton = () => {
     const state = useSelector((state) => state)
+    const dispatch = useDispatch()
 
     const firebaseConfig = {
         databaseURL:
@@ -23,7 +25,10 @@ const SaveButton = () => {
     }
 
     const scramble = () => {
-        writeUserData()
+        if (state.timer.active === false) {
+            writeUserData()
+            dispatch(mix())
+        }
     }
 
     return (

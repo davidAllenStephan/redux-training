@@ -9,9 +9,7 @@ const StartStopButton = () => {
     const dispatch = useDispatch()
 
     const startstop = () => {
-        if (!state.timer.active) {
-            dispatch(mix())
-        }
+        dispatch(mix())
         dispatch(setActive())
         dispatch(clearTime())
     }

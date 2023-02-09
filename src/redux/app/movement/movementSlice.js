@@ -11,6 +11,7 @@ const getMixedArr = (SIZE) => {
         mixedArr[i].value = mixedArr[pos].value
         mixedArr[pos].value = temp
     }
+    console.log(mixedArr)
     return mixedArr
 }
 

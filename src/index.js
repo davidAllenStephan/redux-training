@@ -21,5 +21,6 @@ root.render(
     <SaveButton />
     <NameInput />
     <Score />
+    <h3>After completeing successfully the timer will stop automatically<br />To submit your time put your name in the textfield and hit save</h3>
   </Provider>
 );

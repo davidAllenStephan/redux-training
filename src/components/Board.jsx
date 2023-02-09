@@ -5,6 +5,7 @@ import {
     moveDown,
     moveLeft,
     moveRight,
+    mix,
 } from '../redux/app/movement/movementSlice'
 import { setTime } from '../redux/app/score/scoreSlice'
 import { setActive } from '../redux/app/timer/timerSlice'
@@ -34,7 +35,6 @@ const Board = () => {
     }
 
     const checkIfGameWon = () => {
-        console.log(state.movement.value)
         for (let i = 0; i < 24; i++) {
             if (state.movement.value[i].pos !== state.movement.value[i].value) {
                 return false
@@ -45,6 +45,9 @@ const Board = () => {
     }
 
     const move = (pos) => {
+        if (state.timer.active === false) {
+            dispatch(setActive())
+        }
         const emptyTile = decideMovement(pos)
 
         const xEmpty = Math.ceil((emptyTile + 1) / 5) - 1
@@ -68,7 +71,6 @@ const Board = () => {
     useEffect(() => {
         const gameWon = checkIfGameWon()
         if (gameWon) {
-            console.log('you won!')
             if (state.timer.active) {
                 dispatch(setTime(state.timer.value))
                 dispatch(setActive())
