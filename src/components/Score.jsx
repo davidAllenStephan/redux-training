@@ -1,17 +1,20 @@
 import { getDatabase, ref, onValue } from '@firebase/database'
-import { initializeApp } from 'firebase/app'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 
 const Score = () => {
-    const state = useSelector((state) => state)
     const [scores, setScores] = useState([{ name: "name", time: 1000 }, { name: "name2", time: 11203 }])
 
-    const firebaseConfig = {
-        databaseURL:
-            'https://redux-training-c4a05-default-rtdb.firebaseio.com/',
+    const sortScores = (arr) => {
+        for (let i = 0; i < arr.length; i++) {
+            for (let j = 0; j < arr.length; j++) {
+                if (i !== j && Object.values(arr[i])[0].time < Object.values(arr[j])[0].time) {
+                    const temp = arr[i]
+                    arr[i] = arr[j]
+                    arr[j] = temp
+                }
+            }
+        }
     }
-    const app = initializeApp(firebaseConfig)
 
     const getUserData = async () => {
         const db = getDatabase()
@@ -19,6 +22,7 @@ const Score = () => {
         onValue(starCountRef, (snapshot) => {
             const data = snapshot.val()
             const arrayOfObj = Object.entries(data).map((e) => ({ [e[0]]: e[1] }));
+            sortScores(arrayOfObj)
             setScores(arrayOfObj)
         })
     }
