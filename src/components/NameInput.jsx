@@ -1,12 +1,10 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { setName } from '../redux/app/score/scoreSlice'
+import store from '../redux/store'
 
 const NameInput = () => {
-    const dispatch = useDispatch()
 
     const update = (name) => {
-        dispatch(setName(name))
+        store.dispatch({ type: 'LOG_NAME', payload: name })
     }
 
     return (

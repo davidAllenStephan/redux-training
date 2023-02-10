@@ -1,17 +1,14 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { clearTime, setActive } from '../redux/app/timer/timerSlice'
-import { mix } from '../redux/app/movement/movementSlice'
-import { setTime } from '../redux/app/score/scoreSlice'
+import { useSelector } from 'react-redux'
+import store from '../redux/store'
 
 const StartStopButton = () => {
     const state = useSelector((state) => state)
-    const dispatch = useDispatch()
 
     const startstop = () => {
-        dispatch(mix())
-        dispatch(setActive())
-        dispatch(clearTime())
+        store.dispatch({ type: 'MIX' })
+        store.dispatch({ type: 'SET_ACTIVE' })
+        store.dispatch({ type: 'CLEAR_TIME' })
     }
 
     return (

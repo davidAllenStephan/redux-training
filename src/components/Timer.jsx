@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setTime } from '../redux/app/timer/timerSlice'
+import store from '../redux/store'
 
 const Timer = () => {
     const state = useSelector((state) => state)
-    const dispatch = useDispatch()
 
     useEffect(() => {
         let interval = null
         if (state.timer.active) {
             interval = setInterval(() => {
-                dispatch(setTime())
+                store.dispatch({ type: 'SET_TIME' })
             }, 10)
         } else {
             clearInterval(interval)
@@ -30,13 +29,13 @@ const Timer = () => {
             }}
         >
             <span className="digits">
-                {('0' + Math.floor((state.timer.value / 60000) % 60)).slice(-2)}
+                {('0' + Math.floor((state.timer.time / 60000) % 60)).slice(-2)}
                 :
             </span>
             <span>
-                {('0' + Math.floor((state.timer.value / 1000) % 60)).slice(-2)}.
+                {('0' + Math.floor((state.timer.time / 1000) % 60)).slice(-2)}.
             </span>
-            <span>{('0' + ((state.timer.value / 10) % 100)).slice(-2)}</span>
+            <span>{('0' + ((state.timer.time / 10) % 100)).slice(-2)}</span>
         </h3>
     )
 }

@@ -1,11 +1,9 @@
 import { getDatabase, ref, onValue } from '@firebase/database'
 import { initializeApp } from 'firebase/app'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 
 const Score = () => {
-    const state = useSelector((state) => state)
-    const [scores, setScores] = useState([{ name: "name", time: 1000 }, { name: "name2", time: 11203 }])
+    const [scores, setScores] = useState([])
 
     const firebaseConfig = {
         databaseURL:

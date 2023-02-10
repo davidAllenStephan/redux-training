@@ -1,19 +1,11 @@
 import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import {
-    moveUp,
-    moveDown,
-    moveLeft,
-    moveRight,
-    mix,
-} from '../redux/app/movement/movementSlice'
-import { setTime } from '../redux/app/score/scoreSlice'
-import { setActive } from '../redux/app/timer/timerSlice'
+import { useSelector } from 'react-redux'
+import store from '../redux/store'
 import Tile from './Tile'
 
 const Board = () => {
+
     const state = useSelector((state) => state)
-    const dispatch = useDispatch()
 
     const height = 500
     const width = 500
@@ -46,7 +38,7 @@ const Board = () => {
 
     const move = (pos) => {
         if (state.timer.active === false) {
-            dispatch(setActive())
+            store.dispatch({ type: 'SET_ACTIVE' })
         }
         const emptyTile = decideMovement(pos)
 
@@ -58,13 +50,13 @@ const Board = () => {
         const diffy = Math.abs(xEmpty - xClick)
 
         if (yEmpty === yClick && xEmpty > xClick) {
-            dispatch(moveDown({ pos: pos, diffy: diffy }))
+            store.dispatch({ type: 'MOVE_DOWN', payload: { pos: pos, diffy: diffy } })
         } else if (xEmpty === xClick && yEmpty > yClick) {
-            dispatch(moveRight({ pos: pos, diffx: diffx }))
+            store.dispatch({ type: 'MOVE_RIGHT', payload: { pos: pos, diffx: diffx } })
         } else if (xEmpty === xClick && yEmpty < yClick) {
-            dispatch(moveLeft({ pos: pos, diffx: diffx }))
+            store.dispatch({ type: 'MOVE_LEFT', payload: { pos: pos, diffx: diffx } })
         } else if (yEmpty === yClick && xEmpty < xClick) {
-            dispatch(moveUp({ pos: pos, diffy: diffy }))
+            store.dispatch({ type: 'MOVE_UP', payload: { pos: pos, diffy: diffy } })
         }
     }
 
@@ -72,8 +64,8 @@ const Board = () => {
         const gameWon = checkIfGameWon()
         if (gameWon) {
             if (state.timer.active) {
-                dispatch(setTime(state.timer.value))
-                dispatch(setActive())
+                store.dispatch({ type: 'SET_TIME' })
+                store.dispatch({ type: 'SET_ACTIVE' })
             }
         }
     }, [state.movement.value])

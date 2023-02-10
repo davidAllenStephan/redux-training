@@ -1,12 +1,11 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { mix } from '../redux/app/movement/movementSlice'
+import store from '../redux/store'
 
 const ScrambleButton = () => {
-    const dispatch = useDispatch()
+
 
     const scramble = () => {
-        dispatch(mix())
+        store.dispatch({ type: 'MIX' })
     }
 
     return (

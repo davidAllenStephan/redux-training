@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import Board from './components/Board';
 import ScrambleButton from './components/ScrambleButton'
 import Timer from './components/Timer';
-import store from './redux/app/store';
+import store from './redux/store';
 import { Provider } from 'react-redux';
 import "./styles/index.css"
 import StartStopButton from './components/StartStopButton';
