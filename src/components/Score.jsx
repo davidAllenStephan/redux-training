@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 
 const Score = () => {
     const [scores, setScores] = useState([{ name: "name", time: 1000 }, { name: "name2", time: 11203 }])
-
     const sortScores = (arr) => {
         for (let i = 0; i < arr.length; i++) {
             for (let j = 0; j < arr.length; j++) {
@@ -15,7 +14,6 @@ const Score = () => {
             }
         }
     }
-
     const getUserData = async () => {
         const db = getDatabase()
         const starCountRef = ref(db, 'scores/')
@@ -26,7 +24,6 @@ const Score = () => {
             setScores(arrayOfObj)
         })
     }
-
     useEffect(() => {
         getUserData()
     }, [])
@@ -37,6 +34,7 @@ const Score = () => {
                 position: 'absolute',
                 left: 1200,
                 top: 20,
+                backgroundColor: 'white'
             }}
         >
             {scores.map(score => {
