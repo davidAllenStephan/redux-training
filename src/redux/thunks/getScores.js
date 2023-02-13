@@ -1,19 +1,18 @@
-import Connection from "../../config/Connection"
 import { getScoresFetch, getScoresSuccess } from "../actions/score"
 import { ref, onValue } from '@firebase/database'
-const connection = new Connection()
+import store from "../store"
+import Database from "../../config/Database"
+const database = new Database()
 const getScores = () => {
-    return (dispatch) => {
-        dispatch(getScoresFetch())
-        const db = connection.getDb()
+    return () => {
+        store.dispatch(getScoresFetch())
+        const db = database.getDb()
         const starCountRef = ref(db, 'scores/')
         onValue(starCountRef, (snapshot) => {
             const data = snapshot.val()
             const arrayOfObj = Object.entries(data).map((e) => ({ [e[0]]: e[1] }));
-            dispatch(getScoresSuccess(arrayOfObj))
+            store.dispatch(getScoresSuccess(arrayOfObj))
         })
-
-
     }
 }
 

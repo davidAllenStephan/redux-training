@@ -1,16 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
+import { Provider } from 'react-redux';
+import store from './redux/store';
+
 import Board from './components/Board';
 import ScrambleButton from './components/ScrambleButton'
 import Timer from './components/Timer';
-import store from './redux/store';
-import { Provider } from 'react-redux';
-import "./styles/index.css"
 import StartStopButton from './components/StartStopButton';
 import SaveButton from './components/SaveButton';
 import NameInput from './components/NameInput';
 import Score from './components/Score';
+
 import Connection from './config/Connection';
+
+import "./styles/index.css"
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
