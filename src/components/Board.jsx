@@ -17,11 +17,9 @@ const Board = () => {
         for (let i = 0; i < 24; i++) {
             if (state.movement.value[23].pos !== 24) {
                 return 24
-                break
             }
             if (state.movement.value[i].pos !== i) {
                 return i
-                break
             }
         }
     }
@@ -82,9 +80,9 @@ const Board = () => {
                     backgroundColor: color,
                 }}
             >
-                {state.movement.value.map((order) => {
+                {state.movement.value.map((order, index) => {
                     return (
-                        <div onClick={(e) => move(order.pos)}>
+                        <div key={index} onClick={(e) => move(order.pos)}>
                             <Tile pos={order.pos} value={order.value + 1} />
                         </div>
                     )

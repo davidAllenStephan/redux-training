@@ -10,8 +10,12 @@ import StartStopButton from './components/StartStopButton';
 import SaveButton from './components/SaveButton';
 import NameInput from './components/NameInput';
 import Score from './components/Score';
+import Connection from './config/Connection';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+new Connection()
 root.render(
   <Provider store={store}>
     <Board />

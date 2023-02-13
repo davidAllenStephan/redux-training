@@ -1,17 +1,10 @@
 import { getDatabase, ref, push } from '@firebase/database'
-import { initializeApp } from 'firebase/app'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import store from '../redux/store'
 
 const SaveButton = () => {
     const state = useSelector((state) => state)
-
-    const firebaseConfig = {
-        databaseURL:
-            'https://redux-training-c4a05-default-rtdb.firebaseio.com/',
-    }
-    const app = initializeApp(firebaseConfig)
 
     const writeUserData = () => {
         const db = getDatabase()

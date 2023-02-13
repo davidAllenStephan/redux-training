@@ -2,7 +2,8 @@ import { actions } from '../actions/score'
 
 const initialState = {
     time: 0,
-    name: ''
+    name: '',
+    scores: []
 }
 
 const scoreReducer = (state = initialState, action) => {
@@ -16,6 +17,11 @@ const scoreReducer = (state = initialState, action) => {
             return {
                 ...state,
                 name: action.payload.name
+            }
+        case actions.GET_SCORE_SUCCESS:
+            return {
+                ...state,
+                scores: action.scores
             }
         default:
             return initialState
